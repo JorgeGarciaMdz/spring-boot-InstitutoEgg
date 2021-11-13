@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Libros Form</title>
+</head>
+<body>
+    <h2>New Libro</h2>
+    <a th:href="@{/libro}">Back</a>
+    <form th:action="@{/libro/new-libro}" method="post" th:object="${libroDto}">
+
+        <label for="isbn">Isbn</label>
+        <input type="number" th:field="*{isbn}" id="isbn" placeholder="1234">
+        <span th:if="${#fields.hasErrors('isbn')}" th:errors="*{isbn}"></span><br>
+
+        <label for="titulo">Titulo</label>
+        <input type="text" th:field="*{titulo}" id="titulo" placeholder="Titulo">
+        <span th:if="${#fields.hasErrors('titulo')}" th:errors="*{titulo}"></span><br>
+
+        <label for="anio">Anio</label>
+        <input type="number" th:field="*{anio}" id="anio" placeholder="1234">
+        <span th:if="${#fields.hasErrors('anio')}" th:errors="*{anio}"></span><br>
+
+        <label for="ejemplares">Ejemplares</label>
+        <input type="number" th:field="*{ejemplares}" id="ejemplares" placeholder="0">
+        <span th:if="${#fields.hasErrors('ejemplares')}" th:errors="*{ejemplares}"></span><br>
+
+        <label for="createdAt">Date Up</label>
+        <input type="date" th:field="*{createdAt}" id="createdAt">
+        <span th:if="${#fields.hasErrors('createdAt')}" th:errros="*{createdAt}"></span><br>
+
+        <label for="autorId">Autores</label>
+        <select  id="autorId" th:field="*{autorId}" >
+            <option th:each="autor: ${autors}" th:value="${autor.getId()}" th:text="${autor.getName() + ' ' + autor.getLastname()}"></option>
+        </select>
+        <span th:if="${#fields.hasErrors('autorId')}" th:errors="*{autorId}"></span><br>
+
+        <label for="editorialId">Editorial</label>
+        <select id="editorialId" th:field="*{editorialId}">
+            <option th:each="editorial: ${editorials}" th:value="${editorial.getId()}" th:text="${editorial.getName()}"></option>
+        </select>
+        <span th:if="${#fields.hasErrors('editorialId')}" th:errors="*{editorialId}"></span>
+
+        <input type="submit" value="Create Libro">
+
+    </form>
+</body>
+</html>

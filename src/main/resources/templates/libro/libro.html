@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Libro</title>
+</head>
+
+<body>
+    <h1>Libros</h1>
+    <a th:href="@{/index}">Back</a>
+    <a th:href="@{/libro/form-libro}">New Libro</a>
+    <div th:switch="${libros}">
+        <div th:case="null">
+            <h3>No hay libros!</h3>
+        </div>
+        <div th:case="*">
+            <table>
+                <thead>
+                    <tr>
+                        <td>#</td>
+                        <td>ISBN</td>
+                        <td>Titulo</td>
+                        <td>Anio</td>
+                        <td>Total</td>
+                        <td>Prestados</td>
+                        <td>Disponibles</td>
+                        <td>Fecha Registro</td>
+                        <td></td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="libro: ${libros}">
+                        <td th:text="${libro.getId()}"></td>
+                        <td th:text="${libro.getIsbn()}"></td>
+                        <td th:text="${libro.getTitulo()}"></td>
+                        <td th:text="${libro.getAnio()}"></td>
+                        <td th:text="${libro.getEjemplares()}"></td>
+                        <td th:text="${libro.getEjemplaresPrestados()}"></td>
+                        <td th:text="${libro.getEjemplaresRestantes()}"></td>
+                        <td th:text="${libro.getCreatedAt()}"></td>
+                        <td>
+                            <a th:href="@{/libro/edit-libro/{id}(id=${libro.getId()})}">Edit</a>
+                            <a th:href="@{/libro/delete/{id}(id=${libro.getId()})}">Delete</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+
+</html>

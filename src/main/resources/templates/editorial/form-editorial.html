@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Editorial</title>
+</head>
+<body>
+    <div>
+        <h2>New Editorial</h2>
+        <a th:href="@{/editorial}">Back</a>
+    </div>
+    <div>
+        <form th:action="@{/editorial/editorial-create}" th:object="${editorial}" method="post">
+            <label for="name">Name</label>
+            <input type="text" th:field="*{name}" id="name" placeholder="Name">
+            <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+
+            <!-- <label for="lastname">Lastname</label>
+            <input type="text" th:field="*{lastname}" id="lastname" placeholder="Lastname">
+            <span th:if="${#fields.hasErrors('lastname')}" th:errors="*{lastname}"></span> -->
+
+            <label for="createdAt">Date Up</label>
+            <input type="date" th:field="*{createdAt}" id="createdAt">
+            <span th:if="${#fields.hasErrors('createdAt')}" th:errors="*{createdAt}"></span>
+
+            <input type="submit" value="Create Editorial">
+        </form>
+    </div>
+</body>
+</html>

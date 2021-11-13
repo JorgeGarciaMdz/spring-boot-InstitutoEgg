@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Autors</title>
+</head>
+
+<body>
+    <div>
+        <h1>Autors</h1>
+    </div>
+    <div>
+        <a th:href="@{/index}">Volver</a>
+        <a th:href="@{/autor/nuevo}">Nuevo Autor</a>
+    </div>
+    <div th:switch="${autores}">
+        <h2 th:case="null">No hay autores</h2>
+        <div th:case="*">
+            <h2>Autores</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <td>Id</td>
+                        <td>Nombre</td>
+                        <td>Apellido</td>
+                        <td>Fecha Alta</td>
+                        <td></td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each=" autor: ${autores}">
+                        <td th:text="${autor.getId()}"></td>
+                        <td th:text="${autor.getName()}"></td>
+                        <td th:text="${autor.getLastname()}"></td>
+                        <td th:text="${autor.getCreatedAt()}"></td>
+                        <td>
+                            <a th:href="@{/autor/edit/{id}(id=${autor.getId()})}">Edit</a>
+                            <a th:href="@{/autor/delete/{id}(id=${autor.getId()})}">Delete</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editorials</title>
+</head>
+
+<body>
+    <div>
+        <h1>Editoriales</h1>
+    </div>
+    <div>
+        <a th:href="@{/index}">Volver</a>
+        <a th:href="@{/editorial/nuevo}">Nuevo Editorial</a>
+    </div>
+    <div th:switch="${editoriales}">
+        <h2 th:case="null">No hay editoriales</h2>
+        <div th:case="*">
+            <h2>Editoriales</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <td>Id</td>
+                        <td>Nombre</td>
+                        <!-- <td>Apellido</td> -->
+                        <td>Fecha Alta</td>
+                        <td></td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each=" editorial: ${editoriales}">
+                        <td th:text="${editorial.getId()}"></td>
+                        <td th:text="${editorial.getName()}"></td>
+                        <!-- <td th:text="${autor.getLastname()}"></td> -->
+                        <td th:text="${editorial.getCreatedAt()}"></td>
+                        <td>
+                            <a th:href="@{/editorial/edit/{id}(id=${editorial.getId()})}">Edit</a>
+                            <a th:href="@{/editorial/delete/{id}(id=${editorial.getId()})}">Delete</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+
+</html>
