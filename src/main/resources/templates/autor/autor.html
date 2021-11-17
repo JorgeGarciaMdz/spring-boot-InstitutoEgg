@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{css/css-bootstrap/bootstrap.css}">
+    <link rel="stylesheet" th:href="@{/css/index.css}">
+    <title>Autors</title>
+</head>
+
+<body>
+    <div class="nav-head">
+        <h1 class="welcome">Welcome to Library</h1>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" th:href="@{/index}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" th:href="@{/autor}">Autor</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/editorial}">Editorial</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/libro}">Libros</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div> <br>
+    <div th:switch="${autores}">
+        <h2 th:case="null">No hay autores</h2>
+        <div class="container" th:case="*">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <td scope="col">Id</td>
+                        <td scope="col">Nombre</td>
+                        <td scope="col">Apellido</td>
+                        <td scope="col">Fecha Alta</td>
+                        <td scope="col">
+                            <a th:href="@{/autor/nuevo}">
+                                <button class="btn btn-outline-primary">New</button>
+                            </a>
+                        </td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each=" autor: ${autores}">
+                        <td scope="row" th:text="${autor.getId()}"></td>
+                        <td th:text="${autor.getName()}"></td>
+                        <td th:text="${autor.getLastname()}"></td>
+                        <td th:text="${autor.getCreatedAt()}"></td>
+                        <td>
+                            <a th:href="@{/autor/edit/{id}(id=${autor.getId()})}">
+                                <button class="btn btn-outline-warning">Edit</button>
+                            </a>
+                            <a th:href="@{/autor/delete/{id}(id=${autor.getId()})}">
+                                <button class="btn btn-outline-danger">Delete</button>
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+
+</html>

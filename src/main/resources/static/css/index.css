@@ -1,0 +1,13 @@
+.nav-head{
+    width: auto;
+    height: 4rem;
+    background-color: lavender;
+    margin-bottom: 1rem;
+}
+
+.welcome{
+    font-family: 'Times New Roman', Times, serif;
+    color:darkgray;
+    margin-left: 4rem;
+    padding-top: 5px;
+}

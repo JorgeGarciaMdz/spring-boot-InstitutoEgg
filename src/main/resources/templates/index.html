@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/css-bootstrap/bootstrap.css}">
+    <link rel="stylesheet" th:href="@{/css/index.css}">
+    <title>Index</title>
+</head>
+<body>
+    <div class="nav-head">
+        <h1 class="welcome">Welcome to Library</h1>
+    </div>
+    <div class="container" >
+        <div class="row">
+            <div class="col">
+                <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" th:href="@{/index}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/autor}">Autor</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/editorial}">Editorial</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/libro}">Libros</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

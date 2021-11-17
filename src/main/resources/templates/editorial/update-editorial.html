@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/css-bootstrap/bootstrap.css}">
+    <link rel="stylesheet" th:href="@{/css/index.css}">
+    <title>Update Editorial</title>
+</head>
+
+<body>
+    <div class="nav-head">
+        <h1 class="welcome">Welcome to Library</h1>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" th:href="@{/index}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/autor}">Autor</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" th:href="@{/editorial}">Editorial</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/libro}">Libros</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div><br>
+    <div class="container">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a th:href="@{/editorial}">Editorial</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Edit</li>
+            </ol>
+        </nav>
+    </div>
+    <div class="container">
+        <h2>Edit Editorial</h2>
+        <hr>
+    </div>
+    <div class="container">
+        <form class="row g-3" th:action="@{/editorial/editorial-update/{id}(id=${editorial.getId()})}"
+            th:object="${editorial}" method="post">
+            <div class="col-md-6">
+                <label class="form-label" for="name">Name</label>
+                <input class="form-control" type="text" th:field="*{name}" id="name" placeholder="Name">
+                <span style="color: red;" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+            </div>
+
+            <div class="col-md-6">
+                <label class="form-label" for="createdAt">Date Up</label>
+                <input class="form-control" type="date" th:field="*{createdAt}" id="createdAt">
+                <span style="color: red;" th:if="${#fields.hasErrors('createdAt')}" th:errors="*{createdAt}"></span>
+            </div>
+            <div class="col-md-4">
+                <a th:href="@{/editorial}">
+                    <button class="btn btn-outline-primary" type="button">Back</button>
+                </a>
+            </div>
+            <div class="col-md-4">
+                <button class="btn btn-outline-primary" type="submit">Update</button>
+            </div>
+        </form>
+    </div>
+</body>
+
+</html>
