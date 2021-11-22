@@ -1,12 +1,15 @@
 package com.grupo62.libros.entity;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -27,8 +30,11 @@ public class Libro {
     @NotNull
     private Integer anio;
 
+    @OneToMany
+    private List<Ejemplar> ejemplares = new ArrayList<>();
+
     @NotNull
-    private Integer ejemplares;
+    private Integer cantEjemplares;
 
     private Integer ejemplaresPrestados;
 
@@ -85,12 +91,12 @@ public class Libro {
         this.anio = anio;
     }
 
-    public Integer getEjemplares() {
-        return ejemplares;
+    public Integer getCantEjemplares() {
+        return cantEjemplares;
     }
 
-    public void setEjemplares(Integer ejemplares) {
-        this.ejemplares = ejemplares;
+    public void setCantEjemplares(Integer cantEjemplares) {
+        this.cantEjemplares = cantEjemplares;
     }
 
     public Integer getEjemplaresPrestados() {
@@ -151,8 +157,8 @@ public class Libro {
 
     @Override
     public String toString() {
-        return "Id: " + this.id + ", isbn: " + this.isbn + ", titulo: " + this.titulo + ", anio: " + this.anio +
-        ", ejemplares: " + this.ejemplares + ", ejemplares prestados: " + this.ejemplaresPrestados + 
-        ", ejemplares restantes: " + this.ejemplaresRestantes;
+        return "Id: " + this.id + ", isbn: " + this.isbn + ", titulo: " + this.titulo + ", anio: " + this.anio
+                + ", ejemplares: " + this.cantEjemplares + ", ejemplares prestados: " + this.ejemplaresPrestados
+                + ", ejemplares restantes: " + this.ejemplaresRestantes;
     }
 }

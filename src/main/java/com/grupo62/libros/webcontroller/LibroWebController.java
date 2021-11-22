@@ -68,7 +68,7 @@ public class LibroWebController {
         libro.setTitulo(libroDto.getTitulo());
         libro.setAnio(libroDto.getAnio());
         libro.setCreatedAt(libroDto.getCreatedAt());
-        libro.setEjemplares(libroDto.getEjemplares());
+        libro.setCantEjemplares(libroDto.getEjemplares());
         libro.setIsbn(libroDto.getIsbn());
         libro.setAutor(autor);
         libro.setEditorial(editorial);
@@ -90,7 +90,7 @@ public class LibroWebController {
         libroDto.setIsbn(libro.getIsbn());
         libroDto.setTitulo(libro.getTitulo());
         libroDto.setAnio(libro.getAnio());
-        libroDto.setEjemplares(libro.getEjemplares());
+        libroDto.setEjemplares(libro.getCantEjemplares());
         libroDto.setCreatedAt(libro.getCreatedAt());
         libroDto.setAutorId(libro.getAutor().getId());
         libroDto.setEditorialId(libro.getEditorial().getId());
@@ -122,7 +122,7 @@ public class LibroWebController {
         libro.setIsbn(libroDto.getIsbn());
         libro.setTitulo(libroDto.getTitulo());
         libro.setAnio(libroDto.getAnio());
-        libro.setEjemplares(libroDto.getEjemplares());
+        libro.setCantEjemplares(libroDto.getEjemplares());
         libro.setCreatedAt(libroDto.getCreatedAt());
         libro.setAutor(autor);
         libro.setEditorial(editorial);

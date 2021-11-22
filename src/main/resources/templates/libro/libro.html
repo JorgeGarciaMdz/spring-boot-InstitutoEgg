@@ -30,6 +30,9 @@
                     <li class="nav-item">
                         <a class="nav-link active" th:href="@{/libro}">Libros</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/cliente}">Cliente</a>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -63,7 +66,7 @@
                         <td th:text="${libro.getIsbn()}"></td>
                         <td th:text="${libro.getTitulo()}"></td>
                         <td th:text="${libro.getAnio()}"></td>
-                        <td th:text="${libro.getEjemplares()}"></td>
+                        <td th:text="${libro.getCantEjemplares()}"></td>
                         <td th:text="${libro.getEjemplaresPrestados()}"></td>
                         <td th:text="${libro.getEjemplaresRestantes()}"></td>
                         <td th:text="${libro.getCreatedAt()}"></td>
