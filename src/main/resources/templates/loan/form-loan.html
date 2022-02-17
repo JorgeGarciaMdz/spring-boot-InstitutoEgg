@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" th:href="@{/css/css-bootstrap/bootstrap.css}">
+	<link rel="stylesheet" th:href="@{/css/index.css}">
+	<title>Form Loan</title>
+</head>
+
+<body>
+	<div class="nav-head">
+		<h1 class="welcome">Welcome to Library</h1>
+	</div>
+	<div class="container">
+		<div class="row">
+			<div class="col">
+				<ul class="nav nav-tabs">
+					<li class="nav-item">
+						<a class="nav-link" aria-current="page" th:href="@{/index}">Home</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" th:href="@{/author}">Authors</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" th:href="@{/editorial}">Editorials</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" th:href="@{/book}">Books</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" th:href="@{/partner}">Partners</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link active" th:href="@{/loan}">Loans</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div><br>
+	<div class="container">
+		<h2>New Loan</h2>
+		<hr>
+	</div>
+	<div class="container">
+		<form class="row g-3" th:action="@{/loan/loan-create}" th:object="${loanDto}" method="post" th:with="var = null">
+			<div class="col-md-6">
+				<label class="form-label" for="loanDate">Loan Date</label>
+				<input class="form-control" type="date" th:field="*{loanDate}" id="loanDate">
+				<span style="color: red;" th:if="${#fields.hasErrors('loanDate')}" th:errors="*{loanDate}"></span>
+			</div>
+
+			<div class="col-md-6">
+				<label class="form-label" for="returnDate">Return Date</label>
+				<input class="form-control" type="date" th:field="*{returnDate}" id="returnDate">
+				<span style="color: red;" th:if="${#fields.hasErrors('returnDate')}" th:errors="*{returnDate}"></span>
+			</div>
+
+			<div class="col-md-6">
+				<label class="form-label" for="books">Books</label>
+				<select name="idBook" id="idBook" th:field="*{idBook}" th:onchange="bookSelected()">
+					<option th:each="book: ${books}" th:value="${book.getId()}" th:field="*{idBook}" th:text="${book.getTitle()}">
+						<!--	th:text="${libro.getTitulo()}" th:onclick="showLibro( [[${libro.getEjemplares()}]], event)"> -->
+					</option>
+				</select>
+				<span style="color: red;" th:if="${#fields.hasErrors('idBook')}" th:errors="*{idBook}"></span>
+			</div>
+			<div class="col-md-6">
+				<label for="idEjemplar">Ejemplares</label>
+				<select name="idEjemplar" id="idEjemplar" th:field="*{idEjemplar}">
+					<opcion value="-" th:field="*{idEjemplar}">-</opcion>
+				</select>
+				<span style="color: red;" th:if="${#fields.hasErrors('idEjemplar')}" th:errors="*{idEjemplar}"></span>
+			</div>
+
+			<div class="col-md-6">
+				<label for="partner">Partners</label>
+				<select name="idPartner" id="idPartner" th:field="*{idPartner}">
+					<option th:each="partner: ${partners}" th:value="${partner.getId()}" th:field="*{idPartner}"
+						th:text="${partner.getFullname()}">
+					</option>
+				</select>
+				<span style="color: red;" th:if="${#fields.hasErrors('idPartner')}" th:errors="*{idPartner}"></span>
+			</div>
+			<div class="col-md-4"></div>
+
+			<div class="col-md-4">
+				<a th:href="@{/loan}">
+					<button type="button" class="btn btn-outline-primary">Back</button>
+				</a>
+			</div>
+			<div class="col-md-4">
+				<button class="btn btn-outline-primary" type="submit">Create</button>
+			</div>
+		</form>
+	</div>
+	<script type="text/javascript" th:src="@{/js/loan/Ejemplar.js}"></script>
+	<script th:inline="javascript">
+		var books = /*[[${books}]]*/
+			//	showLibro(libros[0].ejemplares, null);
+		bookSelected()
+	</script>
+
+</body>
+
+</html>

@@ -1,32 +1,33 @@
 package com.grupo62.libros.entity;
 
 import java.util.Date;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Length;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
-public class Editorial {
+public class Author {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private Long Id;
 
     @NotBlank(message = "It cant be empty")
     @Length(min = 3, max = 100, message = "The length must be between 3 and 100 characters")
     private String name;
 
-    @NotNull(message = "It cant be empty")
-    @Min(value = 0)
-    private Integer telephone;
+    @NotBlank(message = "It cant be empty")
+    @Length(min = 3, max = 100, message = "The length must be between 3 and 100 characters")
+    private String lastname;
+
+    @NotBlank(message = "It cant be empty")
+    @Length(min = 10, max = 150, message = "The length must be between 10 and 150 characters")
+    private String email;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date createdAt;
@@ -37,15 +38,12 @@ public class Editorial {
     @DateTimeFormat
     private Date deletedAt;
 
-    public Editorial() {
-    }
-
     public Long getId() {
-        return id;
+        return Id;
     }
 
     public void setId(Long id) {
-        this.id = id;
+        Id = id;
     }
 
     public String getName() {
@@ -56,12 +54,20 @@ public class Editorial {
         this.name = name;
     }
 
-    public Integer getTelephone() {
-        return telephone;
+    public String getLastname() {
+        return lastname;
     }
 
-    public void setTelephone(Integer telephone) {
-        this.telephone = telephone;
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public Date getCreatedAt() {
@@ -90,7 +96,7 @@ public class Editorial {
 
     @Override
     public String toString() {
-        return "Id: " + this.id + ", nombre: " + this.name + ", telephone: " + this.telephone + ", createdAt: "
-                + this.createdAt;
+        return "Id: " + this.Id + ", name: " + this.name + ", lastname: " + this.lastname +
+                ", email: " + this.email + ", createdAt: " + this.createdAt;
     }
 }

@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" th:href="@{/css/css-bootstrap/bootstrap.css}">
     <link rel="stylesheet" th:href="@{/css/index.css}">
-    <title>Form Editorial</title>
+    <title>Form Author</title>
 </head>
 
 <body>
@@ -22,10 +22,10 @@
                         <a class="nav-link" aria-current="page" th:href="@{/index}">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" th:href="@{/author}">Authors</a>
+                        <a class="nav-link active" th:href="@{/author}">Authors</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" th:href="@{/editorial}">Editorials</a>
+                        <a class="nav-link" th:href="@{/editorial}">Editorials</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" th:href="@{/book}">Books</a>
@@ -40,17 +40,16 @@
     <div class="container">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a th:href="@{/editorial}">Editorials</a></li>
+                <li class="breadcrumb-item"><a th:href="@{/author}">Authors</a></li>
                 <li class="breadcrumb-item active" aria-current="page">New</li>
             </ol>
         </nav>
     </div>
     <div class="container">
-        <h2>New Editorial</h2>
-        <hr>
+        <h2>New Author</h2><hr>
     </div>
     <div class="container">
-        <form class="row g-3" th:action="@{/editorial/editorial-create}" th:object="${editorial}" method="post">
+        <form class="row g-3" th:action="@{/author/author-create}" th:object="${author}" method="post">
             <div class="col-md-6">
                 <label class="form-label" for="name">Name</label>
                 <input class="form-control" type="text" th:field="*{name}" id="name" placeholder="Name">
@@ -58,18 +57,28 @@
             </div>
 
             <div class="col-md-6">
-                <label class="form-label" for="tepephone">Telephone</label>
-                <input class="form-control" type="number" th:field="*{telephone}" id="telephone">
-                <span style="color: red;" th:if="${#fields.hasErrors('telephone')}" th:errors="*{telephone}"></span>
+                <label class="form-label" for="lastname">Lastname</label>
+                <input class="form-control" type="text" th:field="*{lastname}" id="lastname" placeholder="Lastname">
+                <span style="color: red;" th:if="${#fields.hasErrors('lastname')}" th:errors="*{lastname}"></span>
             </div>
 
+            <div class="col-md-6">
+                <label class="form-label" for="email">Email</label>
+                <input class="form-control" type="text" th:field="*{email}" id="email" placeholder="Email">
+                <span style="color: red;" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+            </div>
+
+            <div class="col-md-6"></div>
+            
+            <br>
+
             <div class="col-md-4">
-                <a th:href="@{/editorial}">
-                    <button class="btn btn-outline-primary" type="button">Back</button>
+                <a th:href="@{/author}">
+                    <button type="button" class="btn btn-outline-primary">Back</button>
                 </a>
             </div>
             <div class="col-md-4">
-                <button class="btn btn-outline-primary" type="submit">Create</button>
+                <button type="submit" class="btn btn-outline-primary">Create Author</button>
             </div>
         </form>
     </div>

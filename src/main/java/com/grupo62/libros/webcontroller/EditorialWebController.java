@@ -22,12 +22,12 @@ public class EditorialWebController {
 
     @GetMapping()
     public String showAutorList(Model model) {
-        model.addAttribute("editoriales", editorialService.findAll());
+        model.addAttribute("editorials", editorialService.findAll());
         return "/editorial/editorial";
     }
 
     /* -------- dos pasos para la creacion ----------- */
-    @GetMapping("/nuevo")
+    @GetMapping("/new")
     public String showSingUpForm(Editorial editorial) {
         return "/editorial/form-editorial";
     }
@@ -37,8 +37,8 @@ public class EditorialWebController {
         if (result.hasErrors())
             return "/editorial/form-editorial";
 
-        editorialService.saveEditorial(editorial);
-        model.addAttribute("editoriales", editorialService.findAll());
+        editorialService.create(editorial);
+        model.addAttribute("editorials", editorialService.findAll());
         return "redirect:/editorial";
     }
     /* ---------- fin creacion --------- */
@@ -49,7 +49,7 @@ public class EditorialWebController {
     public String showUpdateForm(@PathVariable(name = "id") Long id, Model model) {
         Editorial editorial = editorialService.findById(id);
         if (editorial == null) {
-            model.addAttribute("editoriales", editorialService.findAll());
+            model.addAttribute("editorials", editorialService.findAll());
             return "redirect:/editorial";
         }
 
@@ -64,8 +64,8 @@ public class EditorialWebController {
             editorial.setId(id);
             return "/editorial/update-editorial";
         }
-        editorialService.saveEditorial(editorial);
-        model.addAttribute("editoriales", editorialService.findAll());
+        editorialService.update(editorial);
+        model.addAttribute("editorials", editorialService.findAll());
         return "redirect:/editorial";
     }
     /* ------- fin edicion ------- */
@@ -74,8 +74,8 @@ public class EditorialWebController {
     public String deleteEditorial(@PathVariable(name = "id") Long id, Model model){
         Editorial editorial = editorialService.findById(id);
         if( editorial != null )
-            editorialService.deleteEditorial(editorial);
-        model.addAttribute("editoriales", editorialService.findAll());
+            editorialService.delete(editorial);
+        model.addAttribute("editorials", editorialService.findAll());
         return "redirect:/editorial";
     }
 }

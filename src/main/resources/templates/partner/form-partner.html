@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" th:href="@{/css/css-bootstrap/bootstrap.css}">
     <link rel="stylesheet" th:href="@{/css/index.css}">
-    <title>Form Editorial</title>
+    <title>Form Partner</title>
 </head>
 
 <body>
@@ -25,13 +25,13 @@
                         <a class="nav-link" th:href="@{/author}">Authors</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" th:href="@{/editorial}">Editorials</a>
+                        <a class="nav-link" th:href="@{/editorial}">Editorials</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" th:href="@{/book}">Books</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" th:href="@{/partner}">Partners</a>
+                        <a class="nav-link active" th:href="@{/partner}">Partners</a>
                     </li>
                 </ul>
             </div>
@@ -40,39 +40,52 @@
     <div class="container">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a th:href="@{/editorial}">Editorials</a></li>
+                <li class="breadcrumb-item"><a th:href="@{/partner}">Partners</a></li>
                 <li class="breadcrumb-item active" aria-current="page">New</li>
             </ol>
         </nav>
     </div>
     <div class="container">
-        <h2>New Editorial</h2>
+        <h2>New Partner</h2>
         <hr>
     </div>
     <div class="container">
-        <form class="row g-3" th:action="@{/editorial/editorial-create}" th:object="${editorial}" method="post">
+        <form class="row g-3" th:action="@{/partner/partner-create}" th:object="${partner}" method="post">
             <div class="col-md-6">
-                <label class="form-label" for="name">Name</label>
-                <input class="form-control" type="text" th:field="*{name}" id="name" placeholder="Name">
-                <span style="color: red;" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+                <label class="form-label" for="fullname">Full Name</label>
+                <input class="form-control" type="text" th:field="*{fullname}" id="fullname">
+                <span style="color: red;" th:if="${#fields.hasErrors('fullname')}" th:errors="*{fullname}"></span>
             </div>
 
             <div class="col-md-6">
-                <label class="form-label" for="tepephone">Telephone</label>
+                <label class="form-label" for="dni">DNI</label>
+                <input class="form-control" type="number" th:field="*{dni}" id="dni">
+                <span style="color: red;" th:if="${#fields.hasErrors('dni')}" th:errors="*{dni}"></span>
+            </div>
+
+            <div class="col-md-6">
+                <label class="form-label" for="address">Address</label>
+                <input class="form-control" type="text" th:field="*{address}" id="address">
+                <span style="color: red;" th:if="${#fields.hasErrors('address')}" th:errors="*{address}"></span>
+            </div>
+
+            <div class="col-md-6">
+                <label class="form-label" for="telephone">Telephone</label>
                 <input class="form-control" type="number" th:field="*{telephone}" id="telephone">
                 <span style="color: red;" th:if="${#fields.hasErrors('telephone')}" th:errors="*{telephone}"></span>
             </div>
 
             <div class="col-md-4">
-                <a th:href="@{/editorial}">
-                    <button class="btn btn-outline-primary" type="button">Back</button>
+                <a th:href="@{/partner}">
+                    <button type="button" class="btn btn-outline-primary">Back</button>
                 </a>
             </div>
             <div class="col-md-4">
-                <button class="btn btn-outline-primary" type="submit">Create</button>
+                <button type="submit" class="btn btn-outline-primary">Create Cliente</button>
             </div>
         </form>
     </div>
+
 </body>
 
 </html>

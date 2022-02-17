@@ -15,7 +15,6 @@ public class EditorialService {
     private EditorialRepository editorialRepository;
 
     public List<Editorial> findAll(){
-        // return editorialRepository.findAll();
         return editorialRepository.findByDeletedAtIsNull();
     }
 
@@ -27,12 +26,17 @@ public class EditorialService {
         return null;
     }
 
-    public void saveEditorial(Editorial editorial) {
+    public void create(Editorial editorial){
+        editorial.setCreatedAt(new Date());
+        editorialRepository.save(editorial);
+    }
+
+    public void update(Editorial editorial) {
         editorial.setUpdatedAt(new Date());
         editorialRepository.save(editorial);
     }
 
-    public void deleteEditorial(Editorial editorial) {
+    public void delete(Editorial editorial) {
         editorial.setDeletedAt(new Date());
         editorialRepository.save(editorial);
     }   

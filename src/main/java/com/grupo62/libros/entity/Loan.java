@@ -6,26 +6,24 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.validation.constraints.NotNull;
+import javax.persistence.OneToOne;
+
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
-public class Ejemplar {
+public class Loan {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @NotNull
-    private String edition;
+    @DateTimeFormat
+    private Date loanDate;
 
-    @NotNull
-    private String location;
+    @DateTimeFormat
+    private Date returnDate;
 
-    @NotNull
-    private boolean available;
-
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @DateTimeFormat
     private Date createdAt;
 
     @DateTimeFormat
@@ -34,7 +32,13 @@ public class Ejemplar {
     @DateTimeFormat
     private Date deletedAt;
 
-    public Ejemplar() {
+    @OneToOne
+    private Ejemplar ejemplar;
+
+    @OneToOne
+    private Partner partner;
+
+    public Loan() {
     }
 
     public Long getId() {
@@ -45,28 +49,36 @@ public class Ejemplar {
         this.id = id;
     }
 
-    public String getEdition() {
-        return edition;
+    public Date getLoanDate() {
+        return loanDate;
     }
 
-    public void setEdition(String edition) {
-        this.edition = edition;
+    public void setLoanDate(Date loanDate) {
+        this.loanDate = loanDate;
     }
 
-    public String getLocation() {
-        return location;
+    public Date getReturnDate() {
+        return returnDate;
     }
 
-    public void setLocation(String location) {
-        this.location = location;
+    public void setReturnDate(Date returnDate) {
+        this.returnDate = returnDate;
     }
 
-    public boolean getAvailable() {
-        return available;
+    public Ejemplar getEjemplar() {
+        return ejemplar;
     }
 
-    public void setAvailable(Boolean available) {
-        this.available = available;
+    public void setEjemplar(Ejemplar ejemplar) {
+        this.ejemplar = ejemplar;
+    }
+
+    public Partner getPartner() {
+        return partner;
+    }
+
+    public void setPartner(Partner partner) {
+        this.partner = partner;
     }
 
     public Date getCreatedAt() {
@@ -95,7 +107,7 @@ public class Ejemplar {
 
     @Override
     public String toString() {
-        return "Id: " + this.id + ", edition: " + this.edition + ", location: " + this.location + ", available: "
-                + this.available;
+        return "id: " + this.id + ", loanDate: " + this.loanDate + ", returnDate: " + this.returnDate + ", idEjemplar: "
+                + this.ejemplar.getId() + ", idPartner: " + this.partner.getId();
     }
 }

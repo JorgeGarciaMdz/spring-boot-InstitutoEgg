@@ -5,9 +5,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" th:href="@{css/css-bootstrap/bootstrap.css}">
+    <link rel="stylesheet" th:href="@{/css/css-bootstrap/bootstrap.css}">
     <link rel="stylesheet" th:href="@{/css/index.css}">
-    <title>Editorials</title>
+    <title>Loans</title>
 </head>
 
 <body>
@@ -25,7 +25,7 @@
                         <a class="nav-link" th:href="@{/author}">Authors</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" th:href="@{/editorial}">Editorials</a>
+                        <a class="nav-link" th:href="@{/editorial}">Editorials</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" th:href="@{/book}">Books</a>
@@ -33,40 +33,52 @@
                     <li class="nav-item">
                         <a class="nav-link" th:href="@{/partner}">Partners</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" th:href="@{/loan}">Loans</a>
+                    </li>
                 </ul>
             </div>
         </div>
-    </div> <br>
-    <div th:switch="${editorials}">
-        <h2 th:case="null">No Editorials</h2>
+    </div><br>
+    <div th:switch="${loans}">
+        <div th:case="null">
+            <h3>There are not Loans</h3>
+        </div>
         <div class="container" th:case="*">
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <td scope="col">Id</td>
-                        <td scope="col">Name</td>
-                        <td scope="col">Telephone</td>
-                        <td scope="col">Created At</td>
+                        <td scope="col">#</td>
+                        <td scope="col">Loan Date</td>
+                        <td scope="col">Return Date</td>
+                        <!-- <td scope="col">Available</td> -->
+                        <td scope="col">Edition</td>
+                        <td scope="col">Partner</td>
                         <td scope="col">
-                            <a th:href="@{/editorial/new}">
+                            <a th:href="@{/loan/new}">
                                 <button class="btn btn-outline-primary">New</button>
                             </a>
                         </td>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr th:each="editorial: ${editorials}">
-                        <td scope="row" th:text="${editorial.getId()}"></td>
-                        <td th:text="${editorial.getName()}"></td>
-                        <td th:text="${editorial.getTelephone()}"></td>
-                        <td th:text="${editorial.getCreatedAt()}"></td>
+                    <tr th:each="loan: ${loans}">
+                        <td scope="row" th:text="${loan.getId()}"></td>
+                        <td th:text="${loan.getLoanDate()}"></td>
+                        <td th:text="${loan.getReturnDate()}"></td>
+                        <!-- <td th:text="${loan.available}  ? 'D' : 'N'"></td> -->
+                        <td th:text="${loan.getEjemplar().getEdition()}"></td>
+                        <td th:text="${loan.getPartner().getFullname()}"></td>
                         <td>
-                            <a th:href="@{/editorial/edit/{id}(id=${editorial.getId()})}">
+                            <a th:href="@{/loan/edit-loan/{id}(id=${loan.getId()})}">
                                 <button class="btn btn-outline-warning">Edit</button>
                             </a>
-                            <a th:href="@{/editorial/delete/{id}(id=${editorial.getId()})}">
-                                <button class="btn btn-outline-danger">Delete</button>
+                            <a th:href="@{/loan/delete/{id}(id=${loan.getId()})}">
+                                <button class="btn btn-outline-danger">Give Back</button>
                             </a>
+                            <!-- <a th:href="@{/loan/{idLibro}/ejemplares(idLibro=${libro.getId()})}">
+                                <button class="btn btn-outline-primary">Ejemplares</button>
+                            </a> -->
                         </td>
                     </tr>
                 </tbody>

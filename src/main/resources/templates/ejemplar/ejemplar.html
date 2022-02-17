@@ -5,9 +5,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" th:href="@{css/css-bootstrap/bootstrap.css}">
+    <link rel="stylesheet" th:href="@{/css/css-bootstrap/bootstrap.css}">
     <link rel="stylesheet" th:href="@{/css/index.css}">
-    <title>Editorials</title>
+    <title>Ejemplares</title>
 </head>
 
 <body>
@@ -25,10 +25,10 @@
                         <a class="nav-link" th:href="@{/author}">Authors</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" th:href="@{/editorial}">Editorials</a>
+                        <a class="nav-link" th:href="@{/editorial}">Editorials</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" th:href="@{/book}">Books</a>
+                        <a class="nav-link active" th:href="@{/book}">Books</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" th:href="@{/partner}">Partners</a>
@@ -37,34 +37,44 @@
             </div>
         </div>
     </div> <br>
-    <div th:switch="${editorials}">
-        <h2 th:case="null">No Editorials</h2>
+    <div class="container">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a th:href="@{/book}">Books</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Ejemplares</li>
+            </ol>
+        </nav>
+    </div>
+    <div th:switch="${ejemplares}">
+        <h2 th:case="null">There are not Ejemplares</h2>
         <div class="container" th:case="*">
             <table class="table table-striped">
                 <thead>
                     <tr>
                         <td scope="col">Id</td>
-                        <td scope="col">Name</td>
-                        <td scope="col">Telephone</td>
+                        <td scope="col">Edition</td>
+                        <td scope="col">Location</td>
+                        <td scope="col">Available</td>
                         <td scope="col">Created At</td>
                         <td scope="col">
-                            <a th:href="@{/editorial/new}">
+                            <a th:href="@{/ejemplar/{idBook}/new(idBook=${idBook})}">
                                 <button class="btn btn-outline-primary">New</button>
                             </a>
                         </td>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr th:each="editorial: ${editorials}">
-                        <td scope="row" th:text="${editorial.getId()}"></td>
-                        <td th:text="${editorial.getName()}"></td>
-                        <td th:text="${editorial.getTelephone()}"></td>
-                        <td th:text="${editorial.getCreatedAt()}"></td>
+                    <tr th:each=" ejemplar: ${ejemplares}">
+                        <td scope="row" th:text="${ejemplar.getId()}"></td>
+                        <td th:text="${ejemplar.getEdition()}"></td>
+                        <td th:text="${ejemplar.getLocation()}"></td>
+                        <td th:text="${ejemplar.getAvailable()? 'Yes' : 'No'}"></td>
+                        <td th:text="${ejemplar.getCreatedAt()}"></td>
                         <td>
-                            <a th:href="@{/editorial/edit/{id}(id=${editorial.getId()})}">
+                            <a th:href="@{/ejemplar/{idBook}/edit/{id}(id=${ejemplar.getId()}, idBook = ${idBook})}">
                                 <button class="btn btn-outline-warning">Edit</button>
                             </a>
-                            <a th:href="@{/editorial/delete/{id}(id=${editorial.getId()})}">
+                            <a th:href="@{/ejemplar/{idBook}/delete/{id}(id=${ejemplar.getId()}, idBook = ${idBook})}">
                                 <button class="btn btn-outline-danger">Delete</button>
                             </a>
                         </td>

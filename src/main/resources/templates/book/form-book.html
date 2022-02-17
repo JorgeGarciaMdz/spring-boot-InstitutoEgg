@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/css-bootstrap/bootstrap.css}">
+    <link rel="stylesheet" th:href="@{/css/index.css}">
+    <title>Book Form</title>
+</head>
+
+<body>
+    <div class="nav-head">
+        <h1 class="welcome">Welcome to Library</h1>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" th:href="@{/index}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/author}">Authors</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/editorial}">Editorials</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" th:href="@{/book}">Books</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/partner}">Partners</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div><br>
+    <div class="container">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a th:href="@{/book}">Books</a></li>
+                <li class="breadcrumb-item active" aria-current="page">New</li>
+            </ol>
+        </nav>
+    </div>
+    <div class="container">
+        <h2>New Book</h2>
+        <hr>
+    </div>
+    <div class="container">
+        <form class="row g-3" th:action="@{/book/new-book}" method="post" th:object="${bookDto}">
+
+            <div class="col-md-6">
+                <label class="form-label" for="isbn">Isbn</label>
+                <input class="form-control" type="number" th:field="*{isbn}" id="isbn" placeholder="1234">
+                <span style="color: red;" th:if="${#fields.hasErrors('isbn')}" th:errors="*{isbn}"></span>
+            </div>
+
+            <div class="col-md-6">
+                <label class="form-label" for="title">Title</label>
+                <input class="form-control" type="text" th:field="*{title}" id="title" placeholder="Title Book">
+                <span style="color: red;" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></span>
+            </div>
+
+            <div class="col-md-6">
+                <label class="form-label" for="publicationDate">Publication Date</label>
+                <input class="form-control" type="date" th:field="*{publicationDate}" id="publicationDate" placeholder="">
+                <span style="color: red;" th:if="${#fields.hasErrors('publicationDate')}" th:errors="*{publicationDate}"></span>
+            </div>
+
+            <div class="col-md-6">
+                <label class="form-label" for="auhtorId">Authors</label>
+                <select class="form-control" id="authorId" th:field="*{authorId}">
+                    <option th:each="author: ${authors}" th:value="${author.getId()}"
+                        th:text="${author.getName() + ' ' + author.getLastname()}"></option>
+                </select>
+                <span style="color: red;" th:if="${#fields.hasErrors('authorId')}" th:errors="*{authorId}"></span>
+            </div>
+            <div class="col-md-6">
+                <label class="form-label" for="editorialId">Editorial</label>
+                <select class="form-control" id="editorialId" th:field="*{editorialId}">
+                    <option th:each="editorial: ${editorials}" th:value="${editorial.getId()}"
+                        th:text="${editorial.getName()}">
+                    </option>
+                </select>
+                <span style="color: red;" th:if="${#fields.hasErrors('editorialId')}" th:errors="*{editorialId}"></span>
+            </div>
+            <div class="col-md-6"></div>
+            <div class="col-md-4">
+                <a th:href="@{/book}">
+                    <button class="btn btn-outline-primary" type="button">Back</button>
+                </a>
+            </div>
+            <div class="col-md-4">
+                <button class="btn btn-outline-primary" type="submit">Create</button>
+            </div>
+        </form>
+    </div>
+</body>
+
+</html>

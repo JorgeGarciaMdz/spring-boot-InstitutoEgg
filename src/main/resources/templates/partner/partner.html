@@ -1,15 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" th:href="@{css/css-bootstrap/bootstrap.css}">
     <link rel="stylesheet" th:href="@{/css/index.css}">
-    <title>Editorials</title>
+    <title>Partners</title>
 </head>
-
 <body>
     <div class="nav-head">
         <h1 class="welcome">Welcome to Library</h1>
@@ -25,46 +23,50 @@
                         <a class="nav-link" th:href="@{/author}">Authors</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" th:href="@{/editorial}">Editorials</a>
+                        <a class="nav-link" th:href="@{/editorial}">Editorials</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" th:href="@{/book}">Books</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" th:href="@{/partner}">Partners</a>
+                        <a class="nav-link active" th:href="@{/partner}">Partners</a>
                     </li>
                 </ul>
             </div>
         </div>
     </div> <br>
-    <div th:switch="${editorials}">
-        <h2 th:case="null">No Editorials</h2>
+    <div th:switch="${partners}">
+        <h2 th:case="null">There are not Partners</h2>
         <div class="container" th:case="*">
             <table class="table table-striped">
                 <thead>
                     <tr>
                         <td scope="col">Id</td>
-                        <td scope="col">Name</td>
+                        <td scope="col">Full Name</td>
+                        <td scope="col">DNI</td>
+                        <td scope="col">Address</td>
                         <td scope="col">Telephone</td>
                         <td scope="col">Created At</td>
                         <td scope="col">
-                            <a th:href="@{/editorial/new}">
+                            <a th:href="@{/partner/new}">
                                 <button class="btn btn-outline-primary">New</button>
                             </a>
                         </td>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr th:each="editorial: ${editorials}">
-                        <td scope="row" th:text="${editorial.getId()}"></td>
-                        <td th:text="${editorial.getName()}"></td>
-                        <td th:text="${editorial.getTelephone()}"></td>
-                        <td th:text="${editorial.getCreatedAt()}"></td>
+                    <tr th:each=" partner: ${partners}">
+                        <td scope="row" th:text="${partner.getId()}"></td>
+                        <td th:text="${partner.getFullname()}"></td>
+                        <td th:text="${partner.getDni()}"></td>
+                        <td th:text="${partner.getAddress()}"></td>
+                        <td th:text="${partner.getTelephone()}"></td>
+                        <td th:text="${partner.getCreatedAt()}"></td>
                         <td>
-                            <a th:href="@{/editorial/edit/{id}(id=${editorial.getId()})}">
+                            <a th:href="@{/partner/edit/{id}(id=${partner.getId()})}">
                                 <button class="btn btn-outline-warning">Edit</button>
                             </a>
-                            <a th:href="@{/editorial/delete/{id}(id=${editorial.getId()})}">
+                            <a th:href="@{/partner/delete/{id}(id=${partner.getId()})}">
                                 <button class="btn btn-outline-danger">Delete</button>
                             </a>
                         </td>
@@ -74,5 +76,4 @@
         </div>
     </div>
 </body>
-
 </html>

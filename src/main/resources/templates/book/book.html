@@ -5,9 +5,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" th:href="@{css/css-bootstrap/bootstrap.css}">
+    <link rel="stylesheet" th:href="@{/css/css-bootstrap/bootstrap.css}">
     <link rel="stylesheet" th:href="@{/css/index.css}">
-    <title>Editorials</title>
+    <title>Books</title>
 </head>
 
 <body>
@@ -25,10 +25,10 @@
                         <a class="nav-link" th:href="@{/author}">Authors</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" th:href="@{/editorial}">Editorials</a>
+                        <a class="nav-link" th:href="@{/editorial}">Editorials</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" th:href="@{/book}">Books</a>
+                        <a class="nav-link active" th:href="@{/book}">Books</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" th:href="@{/partner}">Partners</a>
@@ -36,36 +36,49 @@
                 </ul>
             </div>
         </div>
-    </div> <br>
-    <div th:switch="${editorials}">
-        <h2 th:case="null">No Editorials</h2>
+    </div><br>
+    <div th:switch="${books}">
+        <div th:case="null">
+            <h3>There are not Books</h3>
+        </div>
         <div class="container" th:case="*">
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <td scope="col">Id</td>
-                        <td scope="col">Name</td>
-                        <td scope="col">Telephone</td>
+                        <td scope="col">#</td>
+                        <td scope="col">ISBN</td>
+                        <td scope="col">Title</td>
+                        <td scope="col">Publication Date</td>
+                        <td scope="col">Total</td>
+                        <td scope="col">Borrowed</td>
+                        <td scope="col">Avalilable</td>
                         <td scope="col">Created At</td>
                         <td scope="col">
-                            <a th:href="@{/editorial/new}">
+                            <a th:href="@{/book/form-book}">
                                 <button class="btn btn-outline-primary">New</button>
                             </a>
                         </td>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr th:each="editorial: ${editorials}">
-                        <td scope="row" th:text="${editorial.getId()}"></td>
-                        <td th:text="${editorial.getName()}"></td>
-                        <td th:text="${editorial.getTelephone()}"></td>
-                        <td th:text="${editorial.getCreatedAt()}"></td>
+                    <tr th:each="book: ${books}">
+                        <td scope="row" th:text="${book.getId()}"></td>
+                        <td th:text="${book.getIsbn()}"></td>
+                        <td th:text="${book.getTitle()}"></td>
+                        <td th:text="${book.getPublicationDate()}"></td>
+                        <td th:text="${book.getEjemplares().size()}"></td>
+                        <td th:text="${book.getEjemplares().size()}"></td>
+                        <td th:text="${book.getEjemplares().size()}"></td>
+                        <td th:text="${book.getCreatedAt()}"></td>
                         <td>
-                            <a th:href="@{/editorial/edit/{id}(id=${editorial.getId()})}">
+                            <a th:href="@{/book/edit-book/{id}(id=${book.getId()})}">
                                 <button class="btn btn-outline-warning">Edit</button>
                             </a>
-                            <a th:href="@{/editorial/delete/{id}(id=${editorial.getId()})}">
+                            <a th:href="@{/book/delete/{id}(id=${book.getId()})}">
                                 <button class="btn btn-outline-danger">Delete</button>
+                            </a>
+                            <a th:href="@{/book/{idBook}/ejemplares(idBook=${book.getId()})}">
+                                <button class="btn btn-outline-primary">Ejemplares</button>
                             </a>
                         </td>
                     </tr>

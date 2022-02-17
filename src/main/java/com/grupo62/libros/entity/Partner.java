@@ -6,26 +6,31 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
 
 import org.hibernate.validator.constraints.Length;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
-public class Editorial {
+public class Partner {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @NotBlank(message = "It cant be empty")
-    @Length(min = 3, max = 100, message = "The length must be between 3 and 100 characters")
-    private String name;
+    @Length(min = 3, max = 150, message = "The length must be between 3 and 150 characters")
+    private String fullname;
 
-    @NotNull(message = "It cant be empty")
-    @Min(value = 0)
+    @NotNull(message = "There are not Empty")
+    @Positive(message = "Has to be greater than 0")
+    private Integer dni;
+
+    @Length(min = 5, max = 200, message = "The length must be between 3 and 200 characters")
+    private String address;
+
+    @NotNull(message = "There are not Empty")
+    @Positive(message = "Has to be greater than 0")
     private Integer telephone;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -37,7 +42,7 @@ public class Editorial {
     @DateTimeFormat
     private Date deletedAt;
 
-    public Editorial() {
+    public Partner() {
     }
 
     public Long getId() {
@@ -48,12 +53,28 @@ public class Editorial {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getFullname() {
+        return fullname;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFullname(String fullname) {
+        this.fullname = fullname;
+    }
+
+    public Integer getDni() {
+        return dni;
+    }
+
+    public void setDni(Integer dni) {
+        this.dni = dni;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public Integer getTelephone() {
@@ -90,7 +111,7 @@ public class Editorial {
 
     @Override
     public String toString() {
-        return "Id: " + this.id + ", nombre: " + this.name + ", telephone: " + this.telephone + ", createdAt: "
-                + this.createdAt;
+        return "id: " + this.id + ", fullname: " + this.fullname + ", dni: " + this.dni + ", address: " + this.address
+                + ", telephone: " + this.telephone;
     }
 }
