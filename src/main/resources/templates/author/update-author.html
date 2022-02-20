@@ -64,12 +64,7 @@
             </div>
 
             <div class="col-md-6">
-                <label class="form-label" for="createdAt">Created At</label>
-                <input class="form-control" type="date" th:field="*{createdAt}" id="createdAt">
-                <span th:if="${#fields.hasErrors('createdAt')}" th:errors="*{createdAt}"></span>
-            </div>
-            <div class="col-md-6">
-                <label for="form-label" form="email">Email</label>
+                <label class="form-label" for="email">Email</label>
                 <input class="form-control" type="text" th:field="*{email}" id="email">
                 <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
             </div>
