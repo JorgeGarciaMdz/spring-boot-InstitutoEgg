@@ -23,19 +23,19 @@ public class EditorialWebController {
     @GetMapping()
     public String showAutorList(Model model) {
         model.addAttribute("editorials", editorialService.findAll());
-        return "/editorial/editorial";
+        return "editorial/editorial";
     }
 
     /* -------- dos pasos para la creacion ----------- */
     @GetMapping("/new")
     public String showSingUpForm(Editorial editorial) {
-        return "/editorial/form-editorial";
+        return "editorial/form-editorial";
     }
 
     @PostMapping("/editorial-create")
     public String createEditorial(@Valid Editorial editorial, BindingResult result, Model model) {
         if (result.hasErrors())
-            return "/editorial/form-editorial";
+            return "editorial/form-editorial";
 
         editorialService.create(editorial);
         model.addAttribute("editorials", editorialService.findAll());
@@ -54,7 +54,7 @@ public class EditorialWebController {
         }
 
         model.addAttribute("editorial", editorial);
-        return "/editorial/update-editorial";
+        return "editorial/update-editorial";
     }
 
     @PostMapping("/editorial-update/{id}")
@@ -62,7 +62,7 @@ public class EditorialWebController {
             Model model) {
         if (result.hasErrors()) {
             editorial.setId(id);
-            return "/editorial/update-editorial";
+            return "editorial/update-editorial";
         }
         editorialService.update(editorial);
         model.addAttribute("editorials", editorialService.findAll());

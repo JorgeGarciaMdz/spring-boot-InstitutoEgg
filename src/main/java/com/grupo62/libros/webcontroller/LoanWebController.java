@@ -39,7 +39,7 @@ public class LoanWebController {
   @GetMapping
   public String showloans(Model model) {
     model.addAttribute("loans", loanService.findAll());
-    return "/loan/loan.html";
+    return "loan/loan.html";
   }
 
   @GetMapping("/new")
@@ -47,7 +47,7 @@ public class LoanWebController {
     model.addAttribute("loanDto", loanDto);
     model.addAttribute("partners", partnerService.findAll());
     model.addAttribute("books", bookService.findAll());
-    return "/loan/form-loan";
+    return "loan/form-loan";
   }
 
   @PostMapping("/loan-create")
@@ -56,7 +56,7 @@ public class LoanWebController {
       model.addAttribute("loanDto", loanDto);
       model.addAttribute("partners", partnerService.findAll());
       model.addAttribute("books", bookService.findAll());
-      return "/loan/form-loan";
+      return "loan/form-loan";
     } else {
       Loan loan = new Loan();
       loan.setLoanDate(loanDto.getLoanDate());

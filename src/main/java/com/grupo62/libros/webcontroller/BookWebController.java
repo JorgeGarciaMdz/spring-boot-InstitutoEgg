@@ -37,7 +37,7 @@ public class BookWebController {
     @GetMapping()
     public String showBookList(Model model) {
         model.addAttribute("books", bookService.findAll());
-        return "/book/book";
+        return "book/book";
     }
 
     /* ----- Creacion nuevo libro ------- */
@@ -45,7 +45,7 @@ public class BookWebController {
     public String getFormBook(BookDto bookDto, Model model) {
         model.addAttribute("authors", authorService.findAll());
         model.addAttribute("editorials", editorialService.findAll());
-        return "/book/form-book";
+        return "book/form-book";
     }
 
     @PostMapping("/new-book")
@@ -54,7 +54,7 @@ public class BookWebController {
         if (result.hasErrors()) {
             model.addAttribute("authors", authorService.findAll());
             model.addAttribute("editorials", editorialService.findAll());
-            return "/book/form-book";
+            return "book/form-book";
         }
 
         Author author = authorService.findById(bookDto.getAuthorId());
@@ -63,7 +63,7 @@ public class BookWebController {
         if (author == null || editorial == null) {
             model.addAttribute("authors", authorService.findAll());
             model.addAttribute("editorials", editorialService.findAll());
-            return "/book/form-book";
+            return "book/form-book";
         }
         Book book = new Book();
         book.setIsbn(bookDto.getIsbn());
@@ -84,7 +84,7 @@ public class BookWebController {
         Book book = bookService.findById(id);
         if (book == null) {
             model.addAttribute("books", bookService.findAll());
-            return "/book/book";
+            return "book/book";
         }
         BookDto bookDto = new BookDto();
         bookDto.setBookId(book.getId());
@@ -96,7 +96,7 @@ public class BookWebController {
         model.addAttribute("bookDto", bookDto);
         model.addAttribute("authors", authorService.findAll());
         model.addAttribute("editorials", editorialService.findAll());
-        return "/book/update-book";
+        return "book/update-book";
     }
 
     @PostMapping("/update-book/{id}")
@@ -105,7 +105,7 @@ public class BookWebController {
         if (result.hasErrors()) {
             model.addAttribute("authors", authorService.findAll());
             model.addAttribute("editorials", editorialService.findAll());
-            return "/book/form-book";
+            return "book/form-book";
         }
         Book book = bookService.findById(id);
         if (book == null) {
@@ -139,7 +139,7 @@ public class BookWebController {
         Book book = bookService.findById(idBook);
         model.addAttribute("ejemplares", book.getEjemplares());
         model.addAttribute("idBook", idBook);
-        return "/ejemplar/ejemplar";
+        return "ejemplar/ejemplar";
     }
 
 }

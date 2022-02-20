@@ -29,13 +29,13 @@ public class AuthorWebController {
     /* -------- dos pasos para la creacion ----------- */
     @GetMapping("/new")
     public String showSingUpForm(Author author) {
-        return "/author/form-author";
+        return "author/form-author";
     }
 
     @PostMapping("/author-create")
     public String createAuthor(@Valid Author author, BindingResult result, Model model) {
         if (result.hasErrors())
-            return "/author/form-author";
+            return "author/form-author";
 
         authorService.create(author);
         model.addAttribute("authors", authorService.findAll());
@@ -54,7 +54,7 @@ public class AuthorWebController {
         }
 
         model.addAttribute("author", author);
-        return "/author/update-author";
+        return "author/update-author";
     }
 
     @PostMapping("/author-update/{id}")
@@ -62,7 +62,7 @@ public class AuthorWebController {
             Model model) {
         if (result.hasErrors()) {
             author.setId(id);
-            return "/author/update-author";
+            return "author/update-author";
         }
         authorService.update(author);
         model.addAttribute("authors", authorService.findAll());

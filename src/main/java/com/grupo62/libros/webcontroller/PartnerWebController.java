@@ -26,19 +26,19 @@ public class PartnerWebController {
     @GetMapping
     public String showPartnerList(Model model){
         model.addAttribute("partners", partnerService.findAll());
-        return "/partner/partner";
+        return "partner/partner";
     }
 
     /* --------- create Cliente ------ */
     @GetMapping("/new")
     public String showSignUpForm(Partner partner){
-        return "/partner/form-partner";
+        return "partner/form-partner";
     }
 
     @PostMapping("/partner-create")
     public String createPartner(@Valid Partner partner, BindingResult result, Model model){
         if( result.hasErrors())
-            return "/partner/form-partner";
+            return "partner/form-partner";
         partner.setCreatedAt(new Date());
         partner.setUpdatedAt(new Date());
         partnerService.save(partner);
@@ -56,14 +56,14 @@ public class PartnerWebController {
             return "redirect:/partner";
         }
         model.addAttribute("partner", partner);
-        return "/partner/update-partner";
+        return "partner/update-partner";
     }
 
     @PostMapping("/partner-update/{id}")
     public String updatePartner(@PathVariable(name = "id") Long id, @Valid Partner partner, BindingResult result, Model model){
         if( result.hasErrors()){
             partner.setId(id);
-            return "/partner/update-partner";
+            return "partner/update-partner";
         }
         partner.setUpdatedAt(new Date());
         partnerService.save(partner);

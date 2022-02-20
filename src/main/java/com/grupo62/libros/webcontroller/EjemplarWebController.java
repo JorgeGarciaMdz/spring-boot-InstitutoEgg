@@ -32,13 +32,13 @@ public class EjemplarWebController {
     @GetMapping("/{idBook}/new")
     public String showFormEjemplar(@PathVariable(name = "idBook") Long idBook, EjemplarDto ejemplarDto, Model model) {
         ejemplarDto.setIdBook(idBook);
-        return "/ejemplar/form-ejemplar";
+        return "ejemplar/form-ejemplar";
     }
 
     @PostMapping("/ejemplar-create")
     public String createEjemplar(@Valid EjemplarDto ejemplarDto, BindingResult result, Model model) {
         if (result.hasErrors())
-            return "/ejemplar/form-ejemplar";
+            return "ejemplar/form-ejemplar";
 
         Book book = bookService.findById(ejemplarDto.getIdBook());
         if (book == null)
@@ -69,7 +69,7 @@ public class EjemplarWebController {
         ejemplarDto.setLocation(ejemplar.getLocation());
         ejemplarDto.setIdBook(idBook);
         model.addAttribute("ejemplarDto", ejemplarDto);
-        return "/ejemplar/update-ejemplar";
+        return "ejemplar/update-ejemplar";
     }
 
     @PostMapping("/ejemplar-update/{id}")
@@ -78,7 +78,7 @@ public class EjemplarWebController {
         if (result.hasErrors()) {
             System.out.println(result.toString());
             ejemplarDto.setId(id);
-            return "/ejemplar/update-ejemplar";
+            return "ejemplar/update-ejemplar";
         }
         Ejemplar ejemplar = ejemplarService.findById(id);
         if (ejemplar == null)
