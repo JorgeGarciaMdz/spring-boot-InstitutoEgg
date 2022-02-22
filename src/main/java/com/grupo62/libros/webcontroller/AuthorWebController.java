@@ -21,7 +21,6 @@ public class AuthorWebController {
 
     @GetMapping()
     public String showAuthorList(Model model) {
-        System.out.println("\n-------- author --------\n");
         model.addAttribute("authors", authorService.findAll());
         return "author/author";
     }
