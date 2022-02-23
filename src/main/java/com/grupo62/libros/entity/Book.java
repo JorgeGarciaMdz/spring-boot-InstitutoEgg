@@ -3,6 +3,7 @@ package com.grupo62.libros.entity;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -86,7 +87,9 @@ public class Book {
     }
 
     public List<Ejemplar> getEjemplares() {
-        return ejemplares;
+        return ejemplares.stream()
+            .filter(ejemplar -> ejemplar.getDeletedAt() == null)
+            .collect(Collectors.toList());
     }
 
     public void setEjemplares(List<Ejemplar> ejemplares) {
@@ -97,7 +100,19 @@ public class Book {
         this.ejemplares.add(ejemplar);
     }
 
-    public void removeEjemplar(Ejemplar ejemplar){
+    public int getAvailableEjemplars() {
+        return (int) ejemplares.stream()
+                .filter(ejemplar -> ejemplar.getAvailable() == true)
+                .count();
+    }
+
+    public int getBorrowedEjemplars() {
+        return (int) ejemplares.stream()
+                .filter(ejemplar -> ejemplar.getAvailable() == false)
+                .count();
+    }
+
+    public void removeEjemplar(Ejemplar ejemplar) {
         this.ejemplares.remove(ejemplar);
     }
 

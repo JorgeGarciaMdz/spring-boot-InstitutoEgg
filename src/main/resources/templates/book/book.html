@@ -70,8 +70,8 @@
                         <td th:text="${book.getTitle()}"></td>
                         <td th:text="${book.getPublicationDate()}"></td>
                         <td th:text="${book.getEjemplares().size()}"></td>
-                        <td th:text="${book.getEjemplares().size()}"></td>
-                        <td th:text="${book.getEjemplares().size()}"></td>
+                        <td th:text="${book.getBorrowedEjemplars()}"></td>
+                        <td th:text="${book.getAvailableEjemplars()}"></td>
                         <td th:text="${book.getCreatedAt()}"></td>
                         <td>
                             <a th:href="@{/book/edit-book/{id}(id=${book.getId()})}">
