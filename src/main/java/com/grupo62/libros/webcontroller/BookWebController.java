@@ -139,6 +139,7 @@ public class BookWebController {
         Book book = bookService.findById(idBook);
         model.addAttribute("ejemplares", book.getEjemplares());
         model.addAttribute("idBook", idBook);
+        model.addAttribute("titleBook", book.getTitle());
         return "ejemplar/ejemplar";
     }
 

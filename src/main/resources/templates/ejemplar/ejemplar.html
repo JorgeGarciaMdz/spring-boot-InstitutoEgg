@@ -51,6 +51,9 @@
     <div th:switch="${ejemplares}">
         <h2 th:case="null">There are not Ejemplares</h2>
         <div class="container" th:case="*">
+            <u>
+                <h3 th:text="${titleBook}" style="color:peru;"></h3>
+            </u>
             <table class="table table-striped">
                 <thead>
                     <tr>

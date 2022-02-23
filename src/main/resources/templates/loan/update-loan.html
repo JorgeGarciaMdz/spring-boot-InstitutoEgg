@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/css-bootstrap/bootstrap.css}">
+    <link rel="stylesheet" th:href="@{/css/index.css}">
+    <title>Edit Loan</title>
+</head>
+
+<body>
+    <div class="nav-head">
+        <h1 class="welcome">Welcome to Library</h1>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" th:href="@{/index}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/author}">Authors</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/editorial}">Editorials</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/book}">Books</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/partner}">Partners</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" th:href="@{/loan}">Loans</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div><br>
+    <div class="container">
+        <h2>Edit Loan</h2>
+        <hr>
+    </div>
+    <div class="container">
+        <h3 th:text="${book.getTitle()}"></h3>
+        <br>
+        <form class="row g-3" th:action="@{/loan/edit-update/{id}(id=${loanDto.getId()})}" th:object="${loanDto}" method="post"
+            th:with="var = null">
+            <div class="col-md-6">
+                <label class="form-label" for="loanDate">Loan Date</label>
+                <input class="form-control" type="date" th:field="*{loanDate}" id="loanDate">
+                <span style="color: red;" th:if="${#fields.hasErrors('loanDate')}" th:errors="*{loanDate}"></span>
+            </div>
+
+            <div class="col-md-6">
+                <label class="form-label" for="returnDate">Return Date</label>
+                <input class="form-control" type="date" th:field="*{returnDate}" id="returnDate">
+                <span style="color: red;" th:if="${#fields.hasErrors('returnDate')}" th:errors="*{returnDate}"></span>
+            </div>
+
+            <div class="col-md-6">
+                <label for="idEjemplar">Ejemplar:</label>
+                <b>
+                    <span th:text="${ejemplar.getEdition() + '. Location: ' + ejemplar.getLocation()}"></span>
+                </b>
+            </div>
+            <div class="col-md-6">
+                <label for="partner">Partner: </label>
+                <b>
+                    <span for="namePartner" th:text="${partnerFullName}"></span>
+                </b>
+            </div>
+            <div class="col-md-4"></div>
+
+            <div class="col-md-4">
+                <a th:href="@{/loan}">
+                    <button type="button" class="btn btn-outline-primary">Back</button>
+                </a>
+            </div>
+            <div class="col-md-4">
+                <button class="btn btn-outline-primary" type="submit">Update</button>
+            </div>
+        </form>
+    </div>
+
+</body>
+
+</html>
