@@ -7,10 +7,13 @@ function bookSelected() {
 
   books.forEach(book => {
     console.log('---- ' + JSON.stringify(book));
+    console.log('\n ---- \n ' + (book.id === idBook) + '\n ------');
+    console.log(book.id);
+    console.log(idBook);
     if (book.id === idBook) {
       book.ejemplares.forEach(ejemplar => {
         console.log("available: " + JSON.stringify(ejemplar))
-        if (ejemplar.available) {
+        if (!ejemplar.available) {
           const opcion = document.createElement('option');
           opcion.value = ejemplar.id;
           opcion.text = ejemplar.location;
