@@ -7,20 +7,20 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 public class BookDto {
 
-    @NotNull(message = "isb es obligatorio")
+    @NotNull(message = "ISBN is required")
     private Long isbn;
 
-    @NotBlank(message = "Titulo es obligatorio")
+    @NotBlank(message = "Title is required")
     private String title;
 
-    @NotNull(message = "Anio es obligatorio")
+    @NotNull(message = "Publication date is required")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date publicationDate;
 
-    @NotNull(message = "Autor es obligatorio")
+    @NotNull(message = "Author is required")
     private Long authorId;
 
-    @NotNull(message = "Editorial es obligatorio")
+    @NotNull(message = "Editorial is required")
     private Long editorialId;
 
     private Long bookId;

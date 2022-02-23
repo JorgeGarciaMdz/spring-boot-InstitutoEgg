@@ -18,13 +18,13 @@ public class LoanDto {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date returnDate;
 
-    @NotNull(message = "Debe seleccionar un ejemplar")
+    @NotNull(message = "You must select a ejemplar")
     private Long idEjemplar;
 
-    @NotNull(message = "Debe seleccionar un cliente")
+    @NotNull(message = "You must select a customer")
     private Long idPartner;
 
-    @NotNull(message = "Debe seleccionar un libro")
+    @NotNull(message = "You must select a book")
     private Long idBook;
 
     public LoanDto() {
