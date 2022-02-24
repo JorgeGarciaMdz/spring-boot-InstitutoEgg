@@ -77,9 +77,16 @@
                             <a th:href="@{/book/edit-book/{id}(id=${book.getId()})}">
                                 <button class="btn btn-outline-warning">Edit</button>
                             </a>
-                            <a th:href="@{/book/delete/{id}(id=${book.getId()})}">
-                                <button class="btn btn-outline-danger">Delete</button>
-                            </a>
+                            <span th:if="${book.getBorrowedEjemplars()} == 0">
+                                <a th:href="@{/book/delete/{id}(id=${book.getId()})}">
+                                    <button class="btn btn-outline-danger">Delete</button>
+                                </a>
+                            </span>
+                            <span th:if="${book.getBorrowedEjemplars()} != 0">
+                                <abbr title="Cannot delete a Book with borrowed copies">
+                                    <button class="btn btn-outline-danger" disabled>Delete</button>
+                                </abbr>
+                            </span>
                             <a th:href="@{/book/{idBook}/ejemplares(idBook=${book.getId()})}">
                                 <button class="btn btn-outline-primary">Ejemplares</button>
                             </a>

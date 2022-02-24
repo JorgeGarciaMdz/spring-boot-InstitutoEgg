@@ -80,9 +80,16 @@
                             <a th:href="@{/ejemplar/{idBook}/edit/{id}(id=${ejemplar.getId()}, idBook = ${idBook})}">
                                 <button class="btn btn-outline-warning">Edit</button>
                             </a>
-                            <a th:href="@{/ejemplar/{idBook}/delete/{id}(id=${ejemplar.getId()}, idBook = ${idBook})}">
-                                <button class="btn btn-outline-danger">Delete</button>
-                            </a>
+                            <span th:if="${ejemplar.available}">
+                                <a th:href="@{/ejemplar/{idBook}/delete/{id}(id=${ejemplar.getId()}, idBook = ${idBook})}">
+                                    <button class="btn btn-outline-danger">Delete</button>
+                                </a>
+                            </span>
+                            <span th:unless="${ejemplar.available}">
+                                <abbr title="Unable to delete a borrowed item">
+                                    <button class="btn btn-outline-danger" disabled>Delete</button>
+                                </abbr>
+                            </span>
                         </td>
                     </tr>
                 </tbody>
